@@ -1,0 +1,56 @@
+//
+//  practiceInterview.cpp
+//  Stock question from InterviewCake.com
+//
+//  Created by Marisa Schmidt on 7/28/15.
+//
+//
+
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+
+ 
+int main() {
+    
+    int static const MAX = 10; //minutes past opening time - should be 360
+    int const max_profit = (MAX*MAX);
+    int stock_prices_yesterday[MAX] = {200,500,600,100,400,100,601,701,300,510};
+    int store_differences[max_profit];
+    int higher_price = 0;
+    int lower_price = 0;
+    int highest_difference = 0;
+    int p = 0;
+    
+    for (int i=0; i < MAX; i++) { //outer loop
+        
+        //compare element within loop (i) to every other element of array (j)
+        for (int j = MAX-1; j >= 0 ; j-- ) {
+
+                    store_differences[p] = stock_prices_yesterday[j]-stock_prices_yesterday[i];
+            
+                    p++;
+
+        }
+    } //end for loop
+    
+
+    // bubble sort
+    for (int q=0; q < max_profit; q++) {
+        for (int x=0; x < max_profit-1; x++ ) {
+            int temp = 0;
+    
+            if (store_differences[x] > store_differences[x + 1]) {
+                temp = store_differences[x + 1];
+                store_differences[x + 1] = store_differences[x];
+                store_differences[x] = temp;
+            
+            }
+
+        }
+    }
+
+    
+    cout << "the maximum profit you can make is: " << store_differences[max_profit-1] << endl;
+    
+}
