@@ -1,0 +1,87 @@
+//
+//  arrayQuestion.cpp
+//  
+//
+//  Created by Marisa Schmidt on 7/29/15.
+//
+//
+
+#include<stdio.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+/*
+ "You have an array of integers, and for each index you want to find the product of every integer except the integer at that index.
+ Write a function get_products_of_all_ints_except_at_index() that takes an array of integers and returns an array of the products.
+ Do not use division." (InterviewCake.com)
+ */
+
+
+int * Initialize(int []);
+int * DetermineValues(int [], int []);
+void Display(int []);
+int static const MAX = 5;
+
+
+int main() {
+    
+    
+    int Oarray[MAX] = {1, 2, 3, 4, 5}; //original array
+    int Narray[MAX] = {}; //new array
+   
+    Initialize(Narray);
+    
+    DetermineValues (Narray, Oarray); /* THIS FUNCTION ANSWERS THE QUESTION :) */
+    
+    Display (Narray);
+    
+}
+
+int * Initialize (int new_array[]) {
+    
+    fill_n(new_array, MAX, 1); //set Narray values to all 1
+    
+    return new_array;
+    
+}
+
+int * DetermineValues (int Narray[], int Oarray[]) {
+    
+    for (int i = 0; i < MAX; i++) { //for each element of the array
+        
+        for (int j = MAX-1; j >= 0; j--) {
+            
+            if (i != j) { //as long as i does not equal j (aka same element of array)
+                
+                if (j == MAX-1) {
+                    //the beginning of your
+                    Narray[i] = 1;
+                    Narray[i] *= Oarray[j];
+                }
+                else {
+                    
+                    Narray[i] *= Oarray[j];
+                }
+                
+            } // end if statement
+            
+        }// end j loop
+        
+    }// end i loop
+    
+    return Narray;
+    
+}
+
+void Display(int array[]) {
+    
+    //display
+    cout << endl;
+    cout << "Your new array's contents: ";
+    for (int p = 0; p < MAX; p++) {
+        cout << array[p] << " ";
+    }
+    cout << endl << endl;
+    
+}
