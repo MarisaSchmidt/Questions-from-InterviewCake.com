@@ -1,0 +1,87 @@
+//
+//  HighesProd3Ints.cpp
+//  
+//
+//  Created by Marisa Schmidt on 7/30/15.
+//
+//
+
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+
+
+/*calculate highest product combination possible with three integers in an array. We will use array size of 5 as example. */
+
+//int num_elements (int );
+//int * input_elements (int []);
+static const int MAX = 5;
+static const int cubed = (MAX*MAX*MAX)/2;
+
+
+int main() {
+    //num_elements(MAX);
+    
+    int array_of_ints[MAX] = {1, 2, 3, 4, 5};
+   // input_elements(array_of_ints);
+    int products[cubed] = {0}; //have to have a cubed array (for the 3 elements)
+    int q = 0;
+
+    
+    /* FIND ALL POSSIBLE PRODUCTS ---> O(n)? */
+    for (int i = 0; i < MAX; i++) {
+        
+        for (int j = MAX-1; j >= 0; j--) {
+            
+            for (int p = MAX-1; p >= 0; p--) {
+                
+                if ((p != j) && (i != j) && (i != p)) {
+                    
+                    products[q] = array_of_ints[i] * array_of_ints[j] * array_of_ints[p];
+                    q++;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    /* FIND HIGHEST PRODUCT */
+    int highest_product = 0;
+    
+    for (int i = 0; i < cubed; i++) {
+        if (products[i] > highest_product) {
+            highest_product = products[i];
+        }
+    }
+    
+    cout << endl << "HIGHEST PRODUCT POSSIBLE: " << highest_product << endl << endl;
+                
+}
+            
+    
+
+
+    
+    
+/*
+int num_elements (int max){
+    do {
+        cout << "# of ints: need at least 3 elements " << endl;
+        cin >> max;
+    } while(max < 3)
+    return max;
+}
+
+int * input_elements(int array[]) {
+    cout << "enter your elements: " << endl;
+    for (int i = 0; i < MAX; i++) {
+        cin >> array[i];
+    }
+    return array;
+}
+
+*/
